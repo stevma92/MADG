@@ -4,5 +4,8 @@ Introduction to mobile applications development
 KNOW YOUR RIGHTS
 <br /> 
 MATT STEVENS
+<br />
+DANIEL WOODTHORPE
+
 
 
