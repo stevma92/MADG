@@ -2,24 +2,9 @@
 Introduction to mobile applications development
 <br />
 KNOW YOUR RIGHTS
-<br /> 
+<br />
 MATT STEVENS
 <br />
 DANIEL WOODTHORPE
-
-<br /><br />
-git config --global user.name "John Doe"
-git config --global user.email johndoe@example.com
-<br /><br />
-git clone https://github.com/stevma92/MADG
-<br /><br />
-git add --a 
-<br/>
-git commit -m  "your name "
 <br />
-git push 
-
-
-
-
-
+ANDILE MOYO
