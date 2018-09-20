@@ -9,7 +9,7 @@ local scene = composer.newScene()
 local widget = require( "widget" )
 
 contentTitle = {"Overview", "Legislation", "Procedure  & Rights", "Type of Searches"}
-
+content = {"Overview Content", "Legislation Content", "Procedure  & Rights Content", "Type of Searches Cpntent"}
 
 
 local function onRowRender( event )
@@ -21,13 +21,21 @@ local function onRowRender( event )
     local rowHeight = row.contentHeight
     local rowWidth = row.contentWidth
 
-    local rowTitle = display.newText( row, contentTitle[row.index], 0, 0, nil, 14 )
+    local rowTitle = display.newText( row, contentTitle[row.index], 0, 0, nil, 20 )
     rowTitle:setFillColor( 0 )
 
     -- Align the label left and vertically centered
     rowTitle.anchorX = 0
     rowTitle.x = 0
-    rowTitle.y = rowHeight * 0.5
+    rowTitle.y = rowHeight * 0.1
+
+    local rowContent = display.newText( row, content[row.index], 0, 0, nil, 12 )
+    rowContent:setFillColor( 0 )
+
+    -- Align the label left and vertically centered
+    rowContent.anchorX = 0
+    rowContent.x = 0
+    rowContent.y = rowHeight * 0.3
 end
 
 
@@ -35,15 +43,12 @@ end
 function scene:create( event )
 	local sceneGroup = self.view
 
-	-- create some text
-	local title = display.newText( "Stop & Search", display.contentCenterX, 20, native.systemFont, 30 )
-	title:setFillColor( 1 )	-- black
-
-  local tableView = widget.newTableView(
+  local row = event.params.row
+  tableView = widget.newTableView(
     {
         left = 10,
         top = 40,
-        height = 40 * #contentTitle,
+        height = display.contentHeight - 100,
         width = display.contentWidth - 20,
         onRowRender = onRowRender,
         onRowTouch = onRowTouch,
@@ -54,19 +59,20 @@ function scene:create( event )
 -- Insert 40 rows
 for i = 1, #contentTitle do
     -- Insert a row into the tableView
-    tableView:insertRow{}
+    tableView:insertRow({ rowHeight=200})
 end
 
 
 
-	sceneGroup:insert( title )
   sceneGroup:insert(tableView)
-
+  tableView:scrollToIndex(row,20)
 end
 
 function scene:show( event )
 	local sceneGroup = self.view
 	local phase = event.phase
+  local row = event.params.row
+  tableView:scrollToIndex(row,20)
 
 	if phase == "will" then
 		-- Called when the scene is still off screen and is about to move on screen

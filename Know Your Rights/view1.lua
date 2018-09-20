@@ -30,6 +30,11 @@ local function onRowRender( event )
     rowTitle.y = rowHeight * 0.5
 end
 
+local function onRowTouch( event )
+
+  local options = {effect="fromRight", time=400, params={row=event.row.index}}
+  composer.gotoScene( "data1" , options )
+end
 
 
 function scene:create( event )
