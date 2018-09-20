@@ -107,7 +107,7 @@ button.alpha = .5
 
 myDropdown     = dropdown.new{
   x            = screen.rightSide - 20,
-  y            = screen.topSide + 100,
+  y            = screen.topSide + 50,
   toggleButton = button,
   width        = 280,
   marginTop    = 12,
