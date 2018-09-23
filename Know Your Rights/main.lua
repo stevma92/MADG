@@ -22,9 +22,14 @@ end
 local function onSecondView( event )
 	composer.gotoScene( "view2" )
 end
+local function onThirdView( event )
+	composer.gotoScene( "view3" )
+end
 
 
--- create a tabBar widget with two buttons at the bottom of the screen
+function onFourthView( event )
+	composer.gotoScene( "view4" )
+end-- create a tabBar widget with two buttons at the bottom of the screen
 
 -- table to setup buttons
 local tabButtons = {
@@ -46,13 +51,13 @@ local tabButtons = {
 	defaultFile="button2.png",
 	overFile="button2-down.png",
 	width = 32, height = 32,
-	onPress=onSecondView },
+	onPress=onThirdView },
 
 	{ label="Rights When\n Pulled Over",
 	defaultFile="button2.png",
 	overFile="button2-down.png",
 	width = 32, height = 32,
-	onPress=onSecondView },
+	onPress=onFourthView },
 }
 
 -- create the actual tabBar widget
