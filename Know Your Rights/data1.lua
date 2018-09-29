@@ -8,10 +8,34 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 local widget = require( "widget" )
 
+dataFileNames =  {"SS - Overview.txt", "SS - Legislation.txt", "SS - Procedure and Rights.txt", "SS - Types of Searches.txt"  }
 contentTitle = {"Overview", "Legislation", "Procedure & Rights", "Type of Searches"}
-rowHeightInsert = {180, 180, 350, 290} -- hard coded row heights
 
---[[ function to calculate height of rows, may use later
+rowHeightInsert = {180, 180, 350, 290} -- hard coded row heights
+local OverviewContent = ""
+
+
+
+
+
+local function getData(fileName)
+  local path = system.pathForFile( fileName, system.ResourceDirectory )
+  Ncontent = ""
+  i = 0
+  for line in io.lines(path) do
+      i = i + 1
+      Ncontent = Ncontent  .. line .. "\n"
+  end
+
+path = nil
+
+  return Ncontent, i
+
+end
+
+
+
+---[[ function to calculate height of rows, may use later
 local function calculateRowHeight(subject)
 
 	--countWhiteSpace =
@@ -56,78 +80,19 @@ end
 function scene:create( event )
 	local sceneGroup = self.view
 
+
 	-- opens content files TODO refactor into loop
-	local path = system.pathForFile( "SS - Overview.txt", system.ResourceDirectory )
+  -- add error handling if path name cant be found
 
-    -- Open the file handle
-	local file, errorString = io.open( path, "r" )
+  for i = 1, 1 do
+     x , z = getData(dataFileNames[i])
+     print(x)
+     print(z)
+  end
 
-	if not file then
-		-- Error occurred; output the cause
-		print( "File error: " .. errorString )
-	else
-		-- Read data from file
-		OverviewContent = file:read( "*a" )
 
-		-- Close the file handle
-    io.close( file )
-	end
-file = nil
+	content = {"OverviewContent", "LegislationContent"," ProcedureRightsContent", "TypeofSearchesContent"}
 
-	local path = system.pathForFile( "SS - Legislation.txt", system.ResourceDirectory )
-
-    -- Open the file handle
-	local file, errorString = io.open( path, "r" )
-
-	if not file then
-		-- Error occurred; output the cause
-		print( "File error: " .. errorString )
-	else
-		-- Read data from file
-		LegislationContent = file:read( "*a" )
-
-		-- Close the file handle
-    io.close( file )
-	end
-file = nil
-
-	local path = system.pathForFile( "SS - Procedure and Rights.txt", system.ResourceDirectory )
-
-    -- Open the file handle
-	local file, errorString = io.open( path, "r" )
-
-	if not file then
-		-- Error occurred; output the cause
-		print( "File error: " .. errorString )
-	else
-		-- Read data from file
-		ProcedureRightsContent = file:read( "*a" )
-
-		-- Close the file handle
-    io.close( file )
-	end
-file = nil
-
-	local path = system.pathForFile( "SS - Types of Searches.txt", system.ResourceDirectory )
-
-    -- Open the file handle
-	local file, errorString = io.open( path, "r" )
-
-	if not file then
-		-- Error occurred; output the cause
-		print( "File error: " .. errorString )
-	else
-		-- Read data from file
-		TypeofSearchesContent = file:read( "*a" )
-
-		-- Close the file handle
-    io.close( file )
-	end
-file = nil
-
-	content = {OverviewContent, LegislationContent, ProcedureRightsContent, TypeofSearchesContent}
-
-	print(string.len(OverviewContent))
 
 
 
@@ -163,6 +128,9 @@ function scene:show( event )
 	local phase = event.phase
   local row = event.params.row
   tableView:scrollToIndex(row,20)
+
+
+
 
 	if phase == "will" then
 		-- Called when the scene is still off screen and is about to move on screen
