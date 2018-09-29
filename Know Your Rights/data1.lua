@@ -8,8 +8,20 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 local widget = require( "widget" )
 
-contentTitle = {"Overview", "Legislation", "Procedure  & Rights", "Type of Searches"}
+contentTitle = {"Overview", "Legislation", "Procedure & Rights", "Type of Searches"}
+rowHeightInsert = {200, 200, 320, 290} -- hard coded row heights
 
+--[[ function to calculate height of rows, may use later
+local function calculateRowHeight(subject)
+	
+	--countWhiteSpace = 
+	lineSize = 45
+	lineHeight = 20
+	numberOfRows = math.ceil(string.len(subject)/lineSize)
+	print(numberOfRows)
+	return numberOfRows*lineHeight
+	end
+	--]]
 
 
 local function onRowRender( event )
@@ -29,7 +41,7 @@ local function onRowRender( event )
     rowTitle.x = 10
     rowTitle.y = rowHeight * 0.1
 
-    local rowContent = display.newText( row, content[row.index], 0, 0, display.contentWidth - 40, 0, native.systemFont, 12)
+    local rowContent = display.newText( row, content[row.index], 0, 0, display.contentWidth - 40, 0, native.systemFont, 12 )
     rowContent:setFillColor( 0 )
 
     -- Align the label left and vertically centered
@@ -114,6 +126,9 @@ file = nil
 	
 	content = {OverviewContent, LegislationContent, ProcedureRightsContent, TypeofSearchesContent}
 	
+	print(string.len(OverviewContent))
+	
+	
 	
 	
 
@@ -133,7 +148,7 @@ file = nil
 -- Insert 40 rows
 for i = 1, #contentTitle do
     -- Insert a row into the tableView
-    tableView:insertRow({ rowHeight=320})
+    tableView:insertRow({ rowHeight=rowHeightInsert[i]})
 end
 
 
