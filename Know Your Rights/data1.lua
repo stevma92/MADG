@@ -9,12 +9,12 @@ local scene = composer.newScene()
 local widget = require( "widget" )
 
 contentTitle = {"Overview", "Legislation", "Procedure & Rights", "Type of Searches"}
-rowHeightInsert = {200, 200, 320, 290} -- hard coded row heights
+rowHeightInsert = {180, 180, 350, 290} -- hard coded row heights
 
 --[[ function to calculate height of rows, may use later
 local function calculateRowHeight(subject)
-	
-	--countWhiteSpace = 
+
+	--countWhiteSpace =
 	lineSize = 45
 	lineHeight = 20
 	numberOfRows = math.ceil(string.len(subject)/lineSize)
@@ -41,96 +41,97 @@ local function onRowRender( event )
     rowTitle.x = 10
     rowTitle.y = rowHeight * 0.1
 
-    local rowContent = display.newText( row, content[row.index], 0, 0, display.contentWidth - 40, 0, native.systemFont, 12 )
+    local rowContent = display.newText( row, content[row.index], display.contentCenterX, 0, display.contentWidth - 40, 0, native.systemFont, 12 )
     rowContent:setFillColor( 0 )
 
     -- Align the label left and vertically centered
     rowContent.anchorX = 0
-    rowContent.x = 10
-    rowContent.y = rowHeight * 0.5
+    rowContent.anchorY = 0
+    rowContent.x = 20
+    rowContent.y = rowHeight * 0.2
 end
 
 
 
 function scene:create( event )
 	local sceneGroup = self.view
-	
+
 	-- opens content files TODO refactor into loop
 	local path = system.pathForFile( "SS - Overview.txt", system.ResourceDirectory )
- 
+
     -- Open the file handle
 	local file, errorString = io.open( path, "r" )
- 
+
 	if not file then
 		-- Error occurred; output the cause
 		print( "File error: " .. errorString )
 	else
 		-- Read data from file
 		OverviewContent = file:read( "*a" )
-		
+
 		-- Close the file handle
     io.close( file )
 	end
 file = nil
-	
+
 	local path = system.pathForFile( "SS - Legislation.txt", system.ResourceDirectory )
- 
+
     -- Open the file handle
 	local file, errorString = io.open( path, "r" )
- 
+
 	if not file then
 		-- Error occurred; output the cause
 		print( "File error: " .. errorString )
 	else
 		-- Read data from file
 		LegislationContent = file:read( "*a" )
-		
+
 		-- Close the file handle
     io.close( file )
 	end
 file = nil
 
 	local path = system.pathForFile( "SS - Procedure and Rights.txt", system.ResourceDirectory )
- 
+
     -- Open the file handle
 	local file, errorString = io.open( path, "r" )
- 
+
 	if not file then
 		-- Error occurred; output the cause
 		print( "File error: " .. errorString )
 	else
 		-- Read data from file
 		ProcedureRightsContent = file:read( "*a" )
-		
+
 		-- Close the file handle
     io.close( file )
 	end
 file = nil
-	
+
 	local path = system.pathForFile( "SS - Types of Searches.txt", system.ResourceDirectory )
- 
+
     -- Open the file handle
 	local file, errorString = io.open( path, "r" )
- 
+
 	if not file then
 		-- Error occurred; output the cause
 		print( "File error: " .. errorString )
 	else
 		-- Read data from file
 		TypeofSearchesContent = file:read( "*a" )
-		
+
 		-- Close the file handle
     io.close( file )
 	end
 file = nil
-	
+
 	content = {OverviewContent, LegislationContent, ProcedureRightsContent, TypeofSearchesContent}
-	
+
 	print(string.len(OverviewContent))
-	
-	
-	
-	
+
+
+
+
 
   local row = event.params.row
   tableView = widget.newTableView(

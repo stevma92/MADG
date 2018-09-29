@@ -21,12 +21,12 @@ local function onRowRender( event )
     local rowHeight = row.contentHeight
     local rowWidth = row.contentWidth
 
-    local rowTitle = display.newText( row, contentTitle[row.index], 0, 0, nil, 14 )
+    local rowTitle = display.newText( row, contentTitle[row.index], display.contentCenterX, display.contentCenterY, nil, 14 )
     rowTitle:setFillColor( 0 )
 
     -- Align the label left and vertically centered
-    rowTitle.anchorX = 0
-    rowTitle.x = 0
+    rowTitle.anchorX = 0.5
+    rowTitle.x = row.contentWidth / 2
     rowTitle.y = rowHeight * 0.5
 end
 
@@ -61,8 +61,6 @@ for i = 1, #contentTitle do
     -- Insert a row into the tableView
     tableView:insertRow{}
 end
-
-
 
 	sceneGroup:insert( title )
   sceneGroup:insert(tableView)

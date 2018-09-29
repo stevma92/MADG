@@ -34,26 +34,26 @@ end-- create a tabBar widget with two buttons at the bottom of the screen
 -- table to setup buttons
 local tabButtons = {
 	{ label="Stop and Search",
-	defaultFile="button2.png",
-	overFile="button2-down.png",
-	width = 32, height = 32,
+	defaultFile="stop&search.png",
+	overFile="stop&search.png",
+	width = 45, height = 45,
 	onPress=onFirstView,
 	selected=true },
 
-	{ label="Community Rights\n & Obligations",
+	{ label="RBT",
 	labelAlign="center",
 	defaultFile="button2.png",
 	overFile="button2-down.png",
 	width = 32, height = 32,
 	onPress=onSecondView },
 
-	{ label=" RBT\nRights",
+	{ label="Community Rights",
 	defaultFile="button2.png",
 	overFile="button2-down.png",
 	width = 32, height = 32,
 	onPress=onThirdView },
 
-	{ label="Rights When\n Pulled Over",
+	{ label="Traffic Stop",
 	defaultFile="button2.png",
 	overFile="button2-down.png",
 	width = 32, height = 32,
