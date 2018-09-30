@@ -36,7 +36,7 @@ local tabButtons = {
 	{ label="Stop and Search",
 	defaultFile="stop&search.png",
 	overFile="stop&search.png",
-	width = 45, height = 45,
+	width = display.contentWidth/4, height = display.contentWidth/4,
 	onPress=onFirstView,
 	selected=true },
 
@@ -44,25 +44,27 @@ local tabButtons = {
 	labelAlign="center",
 	defaultFile="button2.png",
 	overFile="button2-down.png",
-	width = 32, height = 32,
+	width = display.contentWidth/4, height = display.contentWidth/4,
 	onPress=onSecondView },
 
 	{ label="Community Rights",
 	defaultFile="button2.png",
 	overFile="button2-down.png",
-	width = 32, height = 32,
+	width = display.contentWidth/4, height = display.contentWidth/4,
 	onPress=onThirdView },
 
 	{ label="Traffic Stop",
 	defaultFile="button2.png",
 	overFile="button2-down.png",
-	width = 32, height = 32,
+	width = display.contentWidth/4, height = display.contentWidth/4,
 	onPress=onFourthView },
 }
 
 -- create the actual tabBar widget
 local tabBar = widget.newTabBar{
+	width = display.contentWidth,
 	top = display.contentHeight - 55,	-- 50 is default height for tabBar widget
+	height = display.contentWidth/4 + 10,
 	buttons = tabButtons
 }
 
@@ -119,26 +121,6 @@ myDropdown     = dropdown.new{
   padding      = 20,
   options      = dropdownOptions
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 onFirstView()	-- invoke first tab button's onPress event manually
