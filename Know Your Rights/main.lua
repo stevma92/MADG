@@ -13,14 +13,21 @@ local composer = require "composer"
 local dropdown = require('dropdown')
 local screen = require('screen')
 
+local button1
 
 -- event listeners for tab buttons:
 local function onFirstView( event )
+	-- Swap arround to make this 1 and off press  0.8 or <0.8
+	button1.alpha = 0.8;
 	composer.gotoScene( "view1" )
+
+
 end
 
 local function onSecondView( event )
 	composer.gotoScene( "view2" )
+	button1.alpha = 1;
+
 end
 local function onThirdView( event )
 	composer.gotoScene( "view3" )
@@ -29,46 +36,71 @@ end
 
 function onFourthView( event )
 	composer.gotoScene( "view4" )
-end-- create a tabBar widget with two buttons at the bottom of the screen
-
--- table to setup buttons
-local tabButtons = {
-	{ label="Stop and Search",
-	defaultFile="btnBackImage.png",
-	overFile="btnBackImage.png",
-	width = display.contentWidth/5, height = display.contentWidth/5,
-	onPress=onFirstView,
-	selected=true },
-
-	{ label="RBT",
-	labelAlign="center",
-	defaultFile="button2.png",
-	overFile="button2-down.png",
-	width = display.contentWidth/4, height = display.contentWidth/4,
-	onPress=onSecondView },
-
-	{ label="Community Rights",
-	defaultFile="button2.png",
-	overFile="button2-down.png",
-	width = display.contentWidth/4, height = display.contentWidth/4,
-	onPress=onThirdView },
-
-	{ label="Traffic Stop",
-	defaultFile="button2.png",
-	overFile="button2-down.png",
-	width = display.contentWidth/4, height = display.contentWidth/4,
-	onPress=onFourthView },
-}
-
--- create the actual tabBar widget
-local tabBar = widget.newTabBar{
-	width = display.contentWidth,
-	top = display.contentHeight - 55,	-- 50 is default height for tabBar widget
-	height = display.contentWidth/4 + 10,
-	buttons = tabButtons
-}
+end
 
 
+
+-- display.newRect( display.contentCenterX, display.contentHeight + 19  ,display.contentWidth,80)
+
+		button1 = widget.newButton(
+    {
+				id = " button1",
+				width = display.contentWidth/4,
+        height = display.contentWidth/4 - 20 ,
+        defaultFile = "btnImages/btnStop&SearchSel.png",
+        onPress = onFirstView
+    }
+)
+
+button1.y = display.contentHeight + 11
+button1.x = 2.5 + (display.contentWidth - 20 )/8
+
+
+local button2 = widget.newButton(
+    {
+        width = display.contentWidth/4,
+        height = display.contentWidth/4 - 20,
+        defaultFile = "btnImages/btnBlank.png",
+        --onPress = onSecondView
+    }
+)
+
+button2.y = display.contentHeight + 11
+button2.x = 2.5 +display.contentWidth/4 + (display.contentWidth - 20 )/8
+
+local button3 = widget.newButton(
+    {
+        width = display.contentWidth/4,
+        height = display.contentWidth/4 - 20,
+        defaultFile = "btnImages/btnBlank.png",
+        onEvent = handleButtonEvent
+    }
+)
+
+button3.y = display.contentHeight + 11
+button3.x = 2.5 + (display.contentWidth/4) * 2 + (display.contentWidth - 20 )/8
+
+
+local button4 = widget.newButton(
+    {
+        width = display.contentWidth/4,
+        height = display.contentWidth/4 - 20,
+        defaultFile = "btnImages/btnBlank.png",
+        onEvent = handleButtonEvent
+    }
+)
+
+button4.y = display.contentHeight + 11
+button4.x = 2.5 +(display.contentWidth/4) * 3 + (display.contentWidth - 20 )/8
+
+
+--[[ Test Variables
+local xvalu = display.contentWidth/4
+local yvalu = display.contentWidth/4 - 20
+print("x = " .. xvalu)
+print("y = " .. yvalu)
+print("x/y = " .. xvalu/yvalu )
+--]]
 
 
 local myDropdown
@@ -93,10 +125,10 @@ local dropdownOptions = {
 }
 
 local button = widget.newButton{
-  width       = 32,
-  height      = 32,
-  defaultFile = 'button2.png',
-  overFile    = 'button2.png',
+  width       = 30,
+  height      = 25,
+  defaultFile = 'btnImages/btnDropDown.png',
+  overFile    = 'btnImages/btnDropDown.png',
   onEvent     = function( event )
     local target = event.target
     local phase  = event.phase
@@ -113,8 +145,8 @@ local button = widget.newButton{
 button.alpha = .5
 
 myDropdown     = dropdown.new{
-  x            = screen.rightSide - 20,
-  y            = screen.topSide + 50,
+  x            = screen.rightSide - 25,
+  y            = screen.topSide + 65,
   toggleButton = button,
   width        = 280,
   marginTop    = 12,
@@ -122,5 +154,4 @@ myDropdown     = dropdown.new{
   options      = dropdownOptions
 }
 
-
-onFirstView()	-- invoke first tab button's onPress event manually
+onFirstView()

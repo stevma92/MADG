@@ -47,7 +47,7 @@ function scene:create( event )
     {
         left = 10,
         top = 40,
-        height = 80 * #contentTitle,
+        height = display.contentHeight - 70,
         width = display.contentWidth - 20,
         onRowRender = onRowRender,
         onRowTouch = onRowTouch,
@@ -58,7 +58,7 @@ function scene:create( event )
 -- Insert 40 rows
 for i = 1, #contentTitle do
     -- Insert a row into the tableView
-    tableView:insertRow({rowHeight = 80})
+    tableView:insertRow({rowHeight = (display.contentHeight - 70)/4})
 
 end
 

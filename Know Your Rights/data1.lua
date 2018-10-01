@@ -59,7 +59,7 @@ function scene:create( event )
     width = 40,
     height = 40,
     onEvent = btnBackPressed,
-    defaultFile = 'btnBackImage.png'
+    defaultFile = 'btnImages/btnBackImage.png'
 
   }
 
@@ -81,7 +81,7 @@ function scene:create( event )
     {
         left = 10,
         top = 40,
-        height = display.contentHeight - 100,
+        height = display.contentHeight - 70,
         width = display.contentWidth - 20,
         onRowRender = onRowRender,
         onRowTouch = onRowTouch,
