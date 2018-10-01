@@ -15,6 +15,11 @@ local content = {"No Data Found","No Data Found", "No Data Found", "No Data Foun
 local rowHeightInsert = {250, 250, 250, 250} -- Default Values (Updated to suit amount of text)
 
 
+function btnBackPressed(event)
+    composer.gotoScene( "view1")
+end
+
+
 local function onRowRender( event )
 
     -- Get reference to the row group
@@ -49,9 +54,23 @@ function scene:create( event )
 	local sceneGroup = self.view
   local row = event.params.row
 
+  -- Back Button to return to Stop & Search Menu
+  local btnBack = widget.newButton{
+    width = 40,
+    height = 40,
+    onEvent = btnBackPressed,
+    defaultFile = 'btnBackImage.png'
+
+  }
+
+  btnBack.y = 10
+  btnBack.x = 40
+
+
+
 	-- Get the content for each row
   -- Get the required row height for each data file
-  for i = 1, 4 do
+  for i = 1, #contentTitle do
 				recievedContent, rowHeight = dataControl.getData(dataFileNames[i])
         content[i] = recievedContent
         rowHeightInsert[i] = rowHeight
@@ -77,6 +96,7 @@ function scene:create( event )
       tableView:insertRow({ rowHeight=rowHeightInsert[i]})
   end
 
+  sceneGroup:insert(btnBack)
   sceneGroup:insert(tableView)
   tableView:scrollToIndex(row,20)
 end

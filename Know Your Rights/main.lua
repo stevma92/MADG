@@ -34,9 +34,9 @@ end-- create a tabBar widget with two buttons at the bottom of the screen
 -- table to setup buttons
 local tabButtons = {
 	{ label="Stop and Search",
-	defaultFile="stop&search.png",
-	overFile="stop&search.png",
-	width = display.contentWidth/4, height = display.contentWidth/4,
+	defaultFile="btnBackImage.png",
+	overFile="btnBackImage.png",
+	width = display.contentWidth/5, height = display.contentWidth/5,
 	onPress=onFirstView,
 	selected=true },
 
