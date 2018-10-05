@@ -17,7 +17,7 @@ local button1
 
 local function onHomeView(event)
 	composer.gotoScene("home")
-	
+
 end
 
 
@@ -115,7 +115,7 @@ local myDropdown
 local dropdownOptions = {
 
   {
-    rightIcon = display.newImageRect('button2.png', 32, 32),
+    rightIcon = display.newImageRect('ddnImages/contactDetails.png', 32, 32),
     title     = 'Contact Details',
     action    = function()
       native.showAlert('Dropdown', 'Dropdown', {'Ok'})
@@ -123,7 +123,7 @@ local dropdownOptions = {
   },
   {
 
-    rightIcon = display.newImageRect('button2.png', 32, 32),
+    rightIcon = display.newImageRect('ddnImages/faq.png', 32, 32),
     title     = 'FAQ',
     action    = function()
       native.showAlert('Dropdown', 'Dropdown', {'Ok'})
