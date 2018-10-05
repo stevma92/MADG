@@ -1,63 +1,21 @@
------------------------------------------------------------------------------------------
---
--- view1.lua
---
------------------------------------------------------------------------------------------
+-------------------------------------------------------------
+-- home.lua
+------------------------------------------------------------
+
 
 local composer = require( "composer" )
 local scene = composer.newScene()
 local widget = require( "widget" )
-local dataControl = require("datacontrol")
-local contentTitle = {"Overview", "Legislation", "Procedure & Rights", "Type of Searches"}
-
-function btnBackPressed(event)
-    composer.gotoScene( "home")
-end
-
-local function onRowRender( event )
-
-    -- Get reference to the row group
-    local row = event.row
-
-    -- Cache the row "contentWidth" and "contentHeight" because the row bounds can change as children objects are added
-    local rowHeight = row.contentHeight
-    local rowWidth = row.contentWidth
-
-    local rowTitle = display.newText( row, contentTitle[row.index], display.contentCenterX, display.contentCenterY, "Lucida Sans Unicode", 20 )
-    rowTitle:setFillColor( 0 )
-
-    -- Align the label left and vertically centered
-    rowTitle.anchorX = 0.5
-    rowTitle.x = row.contentWidth / 2
-    rowTitle.y = rowHeight * 0.5
-end
-
-local function onRowTouch( event )
-
-  local options = {effect="fromRight", time=400, params={row=event.row.index}}
-  composer.gotoScene( "data1" , options )
-end
-
+--local contentTitle = {"Stop & Search", "RBT", "Community Rights", "Traffic Stop"}
 
 function scene:create( event )
 	local sceneGroup = self.view
 
 	-- create some text
-	local title = display.newText( "Stop & Search", display.contentCenterX, 20, "Lucida Sans Unicode", 25 )
+	local title = display.newText( "Know Your Rights", display.contentCenterX, 20, "Lucida Sans Unicode", 25 )
 	title:setFillColor( 1 )	-- black
-	
-	 local btnBack = widget.newButton{
-    width = 40,
-    height = 40,
-    onEvent = btnBackPressed,
-    defaultFile = 'btnImages/btnBackImage.png'
 
-  }
-
-  btnBack.y = 15
-  btnBack.x = 30
-
-  local tableView = widget.newTableView(
+ local tableView = widget.newTableView(
     {
         left = 10,
         top = 40,
@@ -69,16 +27,16 @@ function scene:create( event )
     }
 )
 
--- Insert 40 rows
-for i = 1, #contentTitle do
-    -- Insert a row into the tableView
-    tableView:insertRow({rowHeight = (display.contentHeight - 70)/4})
 
-end
+-- Insert 40 rows
+--for i = 1, #contentTitle do
+    -- Insert a row into the tableView
+    -- tableView:insertRow({rowHeight = (display.contentHeight - 70)/4})
+
+--end
 
 	sceneGroup:insert( title )
-	sceneGroup:insert(btnBack)
-  sceneGroup:insert(tableView)
+    sceneGroup:insert(tableView)
 
 end
 

@@ -63,8 +63,8 @@ function scene:create( event )
 
   }
 
-  btnBack.y = 10
-  btnBack.x = 40
+  btnBack.y = 15
+  btnBack.x = 30
 
 
 

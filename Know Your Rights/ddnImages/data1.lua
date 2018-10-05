@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------------------------
 --
--- view1.lua
+-- Data1.lua
 --
 -----------------------------------------------------------------------------------------
 
@@ -8,45 +8,54 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 local widget = require( "widget" )
 local dataControl = require("datacontrol")
+
+local dataFileNames =  {"SS - Overview.txt", "SS - Legislation.txt", "SS - Procedure and Rights.txt", "SS - Types of Searches.txt"  }
 local contentTitle = {"Overview", "Legislation", "Procedure & Rights", "Type of Searches"}
+local content = {"No Data Found","No Data Found", "No Data Found", "No Data Found"}
+local rowHeightInsert = {250, 250, 250, 250} -- Default Values (Updated to suit amount of text)
+
 
 function btnBackPressed(event)
-    composer.gotoScene( "home")
+    composer.gotoScene( "view1")
 end
+
 
 local function onRowRender( event )
 
     -- Get reference to the row group
     local row = event.row
-
-    -- Cache the row "contentWidth" and "contentHeight" because the row bounds can change as children objects are added
+		-- Create Row Height and Width Variables
     local rowHeight = row.contentHeight
     local rowWidth = row.contentWidth
 
-    local rowTitle = display.newText( row, contentTitle[row.index], display.contentCenterX, display.contentCenterY, "Lucida Sans Unicode", 20 )
-    rowTitle:setFillColor( 0 )
+		-- Create Heading Text for each row in the table
+    local rowTitle = display.newText(row, contentTitle[row.index], 0, 0, "Lucida Sans Unicode", 20 )
+    rowTitle:setFillColor( 0 ) -- Black
 
-    -- Align the label left and vertically centered
-    rowTitle.anchorX = 0.5
-    rowTitle.x = row.contentWidth / 2
-    rowTitle.y = rowHeight * 0.5
+    -- Row title position Variables
+    rowTitle.anchorX = 0
+    rowTitle.x = 10
+    rowTitle.y = rowHeight * 0.1
+
+		-- Create Content Variables
+    local rowContent = display.newText( row, content[row.index], display.contentCenterX, 0, display.contentWidth - 40, 0, "Lucida Sans Unicode", 14 )
+    rowContent:setFillColor( 0 )
+
+    -- Row Content Position Variables
+    rowContent.anchorX = 0
+    rowContent.anchorY = 0
+    rowContent.x = 10
+    rowContent.y = rowHeight * 0.15
 end
 
-local function onRowTouch( event )
-
-  local options = {effect="fromRight", time=400, params={row=event.row.index}}
-  composer.gotoScene( "data1" , options )
-end
 
 
 function scene:create( event )
 	local sceneGroup = self.view
+  local row = event.params.row
 
-	-- create some text
-	local title = display.newText( "Stop & Search", display.contentCenterX, 20, "Lucida Sans Unicode", 25 )
-	title:setFillColor( 1 )	-- black
-	
-	 local btnBack = widget.newButton{
+  -- Back Button to return to Stop & Search Menu
+  local btnBack = widget.newButton{
     width = 40,
     height = 40,
     onEvent = btnBackPressed,
@@ -54,10 +63,21 @@ function scene:create( event )
 
   }
 
-  btnBack.y = 15
-  btnBack.x = 30
+  btnBack.y = 10
+  btnBack.x = 40
 
-  local tableView = widget.newTableView(
+
+
+	-- Get the content for each row
+  -- Get the required row height for each data file
+  for i = 1, #contentTitle do
+				recievedContent, rowHeight = dataControl.getData(dataFileNames[i])
+        content[i] = recievedContent
+        rowHeightInsert[i] = rowHeight
+	end
+
+  -- Create a table view for displaying the data
+  tableView = widget.newTableView(
     {
         left = 10,
         top = 40,
@@ -69,22 +89,29 @@ function scene:create( event )
     }
 )
 
--- Insert 40 rows
-for i = 1, #contentTitle do
-    -- Insert a row into the tableView
-    tableView:insertRow({rowHeight = (display.contentHeight - 70)/4})
+  -- add content to each row
+  -- add rows into the table
+  for i = 1, #contentTitle do
+      -- Insert a row into the tableView
+      tableView:insertRow({ rowHeight=rowHeightInsert[i]})
+  end
 
-end
-
-	sceneGroup:insert( title )
-	sceneGroup:insert(btnBack)
+  sceneGroup:insert(btnBack)
   sceneGroup:insert(tableView)
-
+  tableView:scrollToIndex(row,20)
 end
+
+
+--[[ FUNCTION SHOW --]]
 
 function scene:show( event )
 	local sceneGroup = self.view
 	local phase = event.phase
+  local row = event.params.row
+  tableView:scrollToIndex(row,20)
+
+
+
 
 	if phase == "will" then
 		-- Called when the scene is still off screen and is about to move on screen
