@@ -45,6 +45,10 @@ function onFourthView( event )
 	composer.gotoScene( "view4" )
 end
 
+local function onFAQ (event)
+	composer.gotoScene("faq")
+end
+
 
 
 -- display.newRect( display.contentCenterX, display.contentHeight + 19  ,display.contentWidth,80)
@@ -126,7 +130,7 @@ local dropdownOptions = {
     rightIcon = display.newImageRect('ddnImages/faq.png', 32, 32),
     title     = 'FAQ',
     action    = function()
-      native.showAlert('Dropdown', 'Dropdown', {'Ok'})
+      onFAQ()
     end
   },
 }
