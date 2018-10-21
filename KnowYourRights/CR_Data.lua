@@ -198,6 +198,7 @@ function scene:show( event )
 
 	local page = event.params.page
 	btnMainGroup.isVisible = false
+	btnDropDownGroup.isVisible = false
 
 	if page == 1 then
 		btnOvPressed()
@@ -230,6 +231,7 @@ function scene:hide( event )
 
 	elseif phase == "did" then
 		btnMainGroup.isVisible = true
+		btnDropDownGroup.isVisible = true
 
 	end
 end

@@ -13,14 +13,22 @@ local composer = require "composer"
 local dropdown = require("dropdown")
 
 
+--[[ Global Variables Used for alliging elements across multiple views  ]]--
 titleYLocation = display.contentHeight*0.05
 btnWidth = display.contentWidth/4
 btnHeight = display.contentWidth/4 - 20
 btnXLocation = btnWidth/2
 btnYLocation = display.contentHeight - (btnHeight / 2)
 btnMainGroup = display.newGroup()
+btnDropDownGroup = display.newGroup()
 
 
+--[[ Local Variables to Main  ]]--
+local myDropdown
+
+
+--[[ Sets all Title buttons to original state as there are two buttons with differnt
+     Colours overlapped ]]--
 local function setHighlightFalse()
   btnSS.isVisible = true
   btnSS_Sel.isVisible = false
@@ -32,10 +40,29 @@ local function setHighlightFalse()
   btnPO_Sel.isVisible = false
 end
 
+--[[ Calls The FAQ view and hides the drop down menu. ]]--
+local function onFAQView( event )
+
+  setHighlightFalse()
+
+  composer.gotoScene( "FAQ" )
+  btnDropDownGroup.isVisible = false
+end
+
+local function onContactView( event )
+
+  setHighlightFalse()
+  composer.gotoScene( "Contact" )
+  btnDropDownGroup.isVisible = false
+
+end
 
 
 
--- Go to Stop and Search
+
+
+
+--[[ Calls The Stop & Search  view and sets the stop and search button to highlighted ]]--
 local function onSSView( event )
 
   setHighlightFalse()
@@ -44,6 +71,7 @@ local function onSSView( event )
   composer.gotoScene( "SS" )
 end
 
+--[[ Calls The Community Rights view and sets the Community Rights button to highlighted ]]--
 local function onCRView( event )
 
   setHighlightFalse()
@@ -52,6 +80,7 @@ local function onCRView( event )
   composer.gotoScene( "CR" )
 end
 
+--[[ Calls The Random Breath Test  view and sets the Random Breath Test button to highlighted ]]--
 local function onRBTView( event )
 
   setHighlightFalse()
@@ -60,7 +89,7 @@ local function onRBTView( event )
   composer.gotoScene( "RBT" )
 end
 
-
+--[[ Calls The Pulled Over  view and sets the Pulled Over button to highlighted ]]--
 local function onPOView( event )
 
   setHighlightFalse()
@@ -70,7 +99,8 @@ local function onPOView( event )
 end
 
 
--- Stop and Search Buttons
+--[[ Creates 2 Stop and Search buttons with differnet colouring, the _Sel is visible when
+     the user is in the Stop and Search Section ]]--
 btnSS = widget.newButton(
   {
     id = " btnSS",
@@ -92,8 +122,9 @@ btnSS_Sel = widget.newButton(
 )
 btnSS_Sel.isVisible=false
 
--- Community Rights Buttons
 
+--[[ Creates 2 Community Rights buttons with differnet colouring, the _Sel is visible when
+     the user is in the Community Rights Section ]]--
 btnCR = widget.newButton(
   {
     id = " btnCR",
@@ -116,7 +147,9 @@ btnCR_Sel = widget.newButton(
 btnCR_Sel.isVisible = false
 
 
--- Raandom Breath Test buttons
+
+--[[ Creates 2 Random Breath Test buttons with differnet colouring, the _Sel is visible when
+     the user is in the Random Breath Test Section ]]--
 btnRBT= widget.newButton(
   {
     id = " btnRBT",
@@ -138,7 +171,8 @@ btnRBT_Sel = widget.newButton(
 )
 btnRBT_Sel.isVisible = false
 
--- Rights When Pulled Over Buttons
+--[[ Creates 2 Rights When Pulled Over buttons with differnet colouring, the _Sel is visible when
+     the user is in the Rights When Pulled Over  Section ]]--
 
 btnPO = widget.newButton(
   {
@@ -161,9 +195,11 @@ btnPO_Sel = widget.newButton(
 )
 btnPO_Sel.isVisible = false
 
--- Button Locations
-btnSS.x = btnXLocation * 1
+
+--[[ Button Location Settings: Moves each button over by the width of the button ]]--
+btnSS.x = btnXLocation
 btnSS.y = btnYLocation
+
 
 btnSS_Sel.x = btnSS.x
 btnSS_Sel.y = btnSS.y
@@ -190,6 +226,7 @@ btnPO_Sel.x = btnPO.x
 btnPO_Sel.y = btnPO.y
 
 
+--[[ Inserting all buttons into a group to allow for easy visibility changes ]]--
 btnMainGroup:insert(btnSS)
 btnMainGroup:insert(btnSS_Sel)
 btnMainGroup:insert(btnCR)
@@ -199,14 +236,17 @@ btnMainGroup:insert(btnRBT_Sel)
 btnMainGroup:insert(btnPO)
 btnMainGroup:insert(btnPO_Sel)
 
-local myDropdown
+
+
+--[[ Creation of the Drop down Menu for showing FAQ and Contact Details  ]]--
+--[[ Open Source code found at https://github.com/phpedinei/dropdown ]]--
 local dropdownOptions = {
 
   {
     rightIcon = display.newImageRect('btnImages/Main/btnContact.png', 32, 32),
     title     = 'Contact Details',
     action    = function()
-      native.showAlert('Dropdown', 'Dropdown', {'Ok'})
+      onContactView()
     end
   },
   {
@@ -214,7 +254,7 @@ local dropdownOptions = {
     rightIcon = display.newImageRect('btnImages/Main/btnFAQ.png', 32, 32),
     title     = 'FAQ',
     action    = function()
-      onFAQ()
+      onFAQView()
     end
   },
 }
@@ -249,4 +289,6 @@ myDropdown     = dropdown.new{
   options      = dropdownOptions
 }
 
-btnMainGroup:insert(myDropdown)
+btnDropDownGroup:insert(myDropdown)
+
+composer.gotoScene( "Home" )

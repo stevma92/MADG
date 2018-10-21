@@ -1,3 +1,6 @@
+--[[ Open Source code found at https://github.com/phpedinei/dropdown ]]--
+
+
 local screen = require('screen')
 local widget = require('widget')
 local Dropdown = {}
