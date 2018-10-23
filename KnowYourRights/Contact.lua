@@ -1,59 +1,61 @@
 -----------------------------------------------------------------------------------------
---
--- view1.lua
---
+-- KNOW YOUR RIGHTS
+-- Intro to Mobile Application Development
+-- Andile Moyo | 10393863
+-- Daniel Woodthorpe | 10418835
+-- Fiona Slee | 10283333
+-- Matt Stevens | 10457079
+-- Contact.Lua
+-- Contact Details
 -----------------------------------------------------------------------------------------
+
 
 local composer = require( "composer" )
 local scene = composer.newScene()
 local widget = require( "widget" )
 
+--[[Positioning Variables]]--
 local X = display.contentCenterX
 local Y = display.contentCenterY*0.95
 local W = display.contentWidth - 10
 local H = display.contentHeight*0.75
 
-
-
-
+--[[On Emergency Call Button pressed
+		open phone and call 000]]--
 function btnECallPressed(event)
-
 	system.openURL( "tel:000" )
-
 end
 
+--[[On Police Assistance Call Button pressed
+		open phone and call 131444]]--
 function btnPACallPressed(event)
-
 	system.openURL( "tel:131444" )
-
 end
 
-
+--[[On Legal Aid Call Button pressed
+		open phone and call 1300 650 579]]--
 function btnLACallPressed(event)
-
 	system.openURL( "tel:1300650579" )
-
 end
 
-
+--[[Back Button Go back to Home Screen]]--
 function btnBackPressed(event)
-
 	composer.gotoScene("Home")
-
 end
-
-
 
 
 function scene:create( event )
 	local sceneGroup = self.view
 
+
+	--[[Set White Background]]--
 	local bg = display.newRect(X,Y,W,H)
 
-	-- create some text
+	--[[Create Title for Page]]--
 	local title = display.newText( "Contact Details", display.contentCenterX, display.contentHeight*0.05, "Lucida Sans Unicode", 25 )
 	title:setFillColor( 1 )	-- black
 
+	--[[Create back button]]--
   btnBack = widget.newButton(
     {
       id = " btnBack",
@@ -72,6 +74,7 @@ function scene:create( event )
 	txtEmergency:setFillColor(0)
 	txtEmergency.anchorX = 0
 
+	--[[button: Call Emergency Servicces]]--
 	btnECall = widget.newButton(
     {
       id = " btnECall",
@@ -90,6 +93,7 @@ function scene:create( event )
 	txtPoliceAssistance:setFillColor(0)
 	txtPoliceAssistance.anchorX = 0
 
+	--[[button: Call Police Assistance]]--
 	btnPACall = widget.newButton(
 		{
 			id = " btnPACall",
@@ -103,10 +107,12 @@ function scene:create( event )
 	btnPACall.x =  display.contentWidth*0.91
 	btnPACall.y =  H*0.3
 
+
 	local txtLegalAid = display.newText( "Legal Aid WA: 1300 650 579 ", W*0.05, H*0.4,  "Lucida Sans Unicode", 18 )
 	txtLegalAid:setFillColor(0)
 	txtLegalAid.anchorX = 0
 
+	--[[button: Call Legal Aid]]--
 	btnLACall = widget.newButton(
 		{
 			id = " btnLACall",
@@ -120,11 +126,7 @@ function scene:create( event )
 	btnLACall.x =  display.contentWidth*0.91
 	btnLACall.y =  H*0.4
 
-
-
-
-
-
+	--[[Insert all items in to the scene group]]--
 	sceneGroup:insert(bg)
   sceneGroup:insert(title)
   sceneGroup:insert(btnBack)
@@ -135,25 +137,8 @@ function scene:create( event )
 	sceneGroup:insert(txtLegalAid)
 	sceneGroup:insert(btnLACall)
 
-
-
-
 end
 
-function scene:show( event )
-	local sceneGroup = self.view
-	local phase = event.phase
-
-  --webView:request( "DropDownMenu_Pages/contact.html", system.ResourceDirectory )
-	if phase == "will" then
-
-	elseif phase == "did" then
-		-- Called when the scene is now on screen
-		--
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
-	end
-end
 
 function scene:hide( event )
 	local sceneGroup = self.view
@@ -161,19 +146,7 @@ function scene:hide( event )
 
 	if event.phase == "will" then
     btnDropDownGroup.isVisible = true
-
-  	elseif phase == "did" then
-
 	end
-end
-
-function scene:destroy( event )
-	local sceneGroup = self.view
-
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	--
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
 end
 
 ---------------------------------------------------------------------------------

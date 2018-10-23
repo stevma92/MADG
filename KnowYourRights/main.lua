@@ -1,5 +1,10 @@
 -----------------------------------------------------------------------------------------
---
+-- KNOW YOUR RIGHTS
+-- Intro to Mobile Application Development
+-- Andile Moyo | 10393863
+-- Daniel Woodthorpe | 10418835
+-- Fiona Slee | 10283333
+-- Matt Stevens | 10457079
 -- main.lua
 --
 -----------------------------------------------------------------------------------------
@@ -56,10 +61,6 @@ local function onContactView( event )
   btnDropDownGroup.isVisible = false
 
 end
-
-
-
-
 
 
 --[[ Calls The Stop & Search  view and sets the stop and search button to highlighted ]]--
@@ -289,6 +290,8 @@ myDropdown     = dropdown.new{
   options      = dropdownOptions
 }
 
+--[[ This group is used to be able to hide the drop down menu on certain pages]]--
 btnDropDownGroup:insert(myDropdown)
 
+--[[Go to Home Page]]--
 composer.gotoScene( "Home" )

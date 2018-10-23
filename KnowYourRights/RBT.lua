@@ -1,12 +1,18 @@
 -----------------------------------------------------------------------------------------
---
--- view1.lua
---
+-- KNOW YOUR RIGHTS
+-- Intro to Mobile Application Development
+-- Andile Moyo | 10393863
+-- Daniel Woodthorpe | 10418835
+-- Fiona Slee | 10283333
+-- Matt Stevens | 10457079
+-- RBT.Lua
+-- Random Breath Test
 -----------------------------------------------------------------------------------------
 
 local composer = require( "composer" )
 local scene = composer.newScene()
 local widget = require( "widget" )
+--[[Headings called by the row render. They are placed here so the can easily be modified]]--
 local contentTitle = {"Overview", "Drink Driving", "Procedure", "Rights and Obligations"}
 
 
@@ -19,6 +25,7 @@ local function onRowRender( event )
     local rowHeight = row.contentHeight
     local rowWidth = row.contentWidth
 
+    --[[displaying the headings for each section in the row]]--
     local rowTitle = display.newText( row, contentTitle[row.index], display.contentCenterX, display.contentCenterY, "Lucida Sans Unicode", 20 )
     rowTitle:setFillColor( 0 )
 
@@ -28,6 +35,9 @@ local function onRowRender( event )
     rowTitle.y = rowHeight * 0.5
 end
 
+--[[Each Row represent a section under the main category
+    When a row is pressed the Data Scene is called and also the row
+    selected is passed as a parameter]]--
 local function onRowTouch( event )
 
   local options = {params={page=event.row.index}}
@@ -38,10 +48,10 @@ end
 function scene:create( event )
 	local sceneGroup = self.view
 
-	-- create some text
-	local title = display.newText( "Random Breath Test", display.contentCenterX, display.contentHeight*0.05, "Lucida Sans Unicode", 20 )
-	title:setFillColor( 1 )	-- black
+local title = display.newText( "Random Breath Test", display.contentCenterX, display.contentHeight*0.05, "Lucida Sans Unicode", 20 )
+	title:setFillColor( 1 )	
 
+  --[[Creating table view to show all the sections]]--
   local tableView = widget.newTableView(
     {
         left = 10,
@@ -54,53 +64,14 @@ function scene:create( event )
     }
 )
 
--- Insert 40 rows
-for i = 1, #contentTitle do
+  for i = 1, #contentTitle do
     -- Insert a row into the tableView
     tableView:insertRow({rowHeight = (display.contentHeight - 120)/4})
-
-end
+  end
 
 	sceneGroup:insert( title )
   sceneGroup:insert(tableView)
 
-end
-
-function scene:show( event )
-	local sceneGroup = self.view
-	local phase = event.phase
-
-	if phase == "will" then
-		-- Called when the scene is still off screen and is about to move on screen
-	elseif phase == "did" then
-		-- Called when the scene is now on screen
-		--
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
-	end
-end
-
-function scene:hide( event )
-	local sceneGroup = self.view
-	local phase = event.phase
-
-	if event.phase == "will" then
-		-- Called when the scene is on screen and is about to move off screen
-		--
-		-- INSERT code here to pause the scene
-		-- e.g. stop timers, stop animation, unload sounds, etc.)
-	elseif phase == "did" then
-		-- Called when the scene is now off screen
-	end
-end
-
-function scene:destroy( event )
-	local sceneGroup = self.view
-
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	--
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
 end
 
 ---------------------------------------------------------------------------------

@@ -1,3 +1,7 @@
+--[[ Open Source code found at https://github.com/phpedinei/dropdown
+     Contains variables used in the creation of the drop down menu ]]--
+
+
 local Screen = {}
 
 Screen.totalWidth  = display.contentWidth-(display.screenOriginX*2);

@@ -1,4 +1,5 @@
---[[ Open Source code found at https://github.com/phpedinei/dropdown ]]--
+--[[ Open Source code found at https://github.com/phpedinei/dropdown
+     Creates a Dropdown menu ]]--
 
 
 local screen = require('screen')

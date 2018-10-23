@@ -1,6 +1,11 @@
 -----------------------------------------------------------------------------------------
---
--- view1.lua
+-- KNOW YOUR RIGHTS
+-- Intro to Mobile Application Development
+-- Andile Moyo | 10393863
+-- Daniel Woodthorpe | 10418835
+-- Fiona Slee | 10283333
+-- Matt Stevens | 10457079
+-- Home.lua
 --
 -----------------------------------------------------------------------------------------
 
@@ -8,6 +13,7 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 local widget = require( "widget" )
 
+--[[Item placement Variables ]]--
 local X = display.contentCenterX
 local Y = display.contentCenterY*0.95
 local W = display.contentWidth - 10
@@ -17,11 +23,8 @@ local H = display.contentHeight*0.75
 function scene:create( event )
 	local sceneGroup = self.view
 
-	local bg = display.newImage(  "btnImages/Main/Home.png", X , Y)
+	local backGround = display.newImage(  "btnImages/Main/Home.png", X , Y)
 
-	-- create some text
-	--local title = display.newText( "KNOW YOUR RIGHTS", display.contentCenterX, display.contentHeight*.2, "Lucida Sans Unicode", 40 )
-	--title:setFillColor( 1 )	-- black
 
 	local options =
 	{
@@ -40,54 +43,9 @@ function scene:create( event )
 	-- Align object to top alignment axis
 	title.y = Y*0.5
 
-
-
-
-
-
-	sceneGroup:insert(bg)
+	sceneGroup:insert(backGround)
   sceneGroup:insert(title)
 
-
-
-
-
-end
-
-function scene:show( event )
-	local sceneGroup = self.view
-	local phase = event.phase
-
-  --webView:request( "DropDownMenu_Pages/contact.html", system.ResourceDirectory )
-	if phase == "will" then
-
-	elseif phase == "did" then
-		-- Called when the scene is now on screen
-		--
-		-- INSERT code here to make the scene come alive
-		-- e.g. start timers, begin animation, play audio, etc.
-	end
-end
-
-function scene:hide( event )
-	local sceneGroup = self.view
-	local phase = event.phase
-
-	if event.phase == "will" then
-    btnDropDownGroup.isVisible = true
-
-  	elseif phase == "did" then
-
-	end
-end
-
-function scene:destroy( event )
-	local sceneGroup = self.view
-
-	-- Called prior to the removal of scene's "view" (sceneGroup)
-	--
-	-- INSERT code here to cleanup the scene
-	-- e.g. remove display objects, remove touch listeners, save state, etc.
 end
 
 ---------------------------------------------------------------------------------
