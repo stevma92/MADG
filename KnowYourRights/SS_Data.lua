@@ -253,7 +253,7 @@ function scene:show( event )
 	--[[ Selects the page based off the row index of the Sections menu pages ]]--
 	if page == 1 then
 		btnOvPressed()
-	elsaeif  page == 2 then
+	elseif  page == 2 then
 		btnLegPressed()
 	elseif page == 3 then
 		btnPRPressed()
