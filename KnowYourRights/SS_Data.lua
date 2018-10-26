@@ -5,7 +5,7 @@
 -- Daniel Woodthorpe | 10418835
 -- Fiona Slee | 10283333
 -- Matt Stevens | 10457079
--- CR_Data.Lua
+-- SS_Data.Lua
 -- Community Rights Data File
 -----------------------------------------------------------------------------------------
 

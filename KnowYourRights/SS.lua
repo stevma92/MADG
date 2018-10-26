@@ -13,7 +13,7 @@ local composer = require( "composer" )
 local scene = composer.newScene()
 local widget = require( "widget" )
 --[[Headings called by the row render. They are placed here so the can easily be modified]]--
-local contentTitle = {"Overview", "Legislation", "Procedure & Rights", "Type of Searches"}
+local contentTitle = {"Overview", "Legislation", "Procedure & Rights", "Types of Searches"}
 
 
 local function onRowRender( event )
